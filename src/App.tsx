@@ -1236,61 +1236,6 @@ export default function App() {
                    Powered by Google Gemini AI & Supabase
                 </div>
 
-                {savedQuizzes.length > 0 && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="w-full max-w-5xl space-y-6 pt-12 border-t border-gray-100"
-                  >
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-black text-gray-800 flex items-center gap-2">
-                        <History className="w-5 h-5 text-indigo-600" />
-                        最近のクイズ履歴
-                      </h3>
-                      <button 
-                        onClick={() => {
-                          setUserMode('student');
-                          setQuizData(null);
-                        }}
-                        className="text-xs font-bold text-gray-400 hover:text-indigo-600 transition-colors"
-                      >
-                        もっと見る
-                      </button>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {savedQuizzes.slice(0, 3).map((quiz) => (
-                        <div 
-                          key={quiz.id}
-                          onClick={() => {
-                            setUserMode('student');
-                            loadQuizFromDB(quiz.id);
-                          }}
-                          className="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-indigo-100 transition-all cursor-pointer group flex flex-col justify-between min-h-[160px]"
-                        >
-                          <div>
-                            <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest block mb-1">
-                              {quiz.unit}
-                            </span>
-                            <h4 className="text-sm font-black text-gray-800 leading-snug line-clamp-2 group-hover:text-indigo-600 transition-colors">
-                              {quiz.source_title}
-                            </h4>
-                          </div>
-                          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-50">
-                            <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400">
-                               <FileText className="w-3 h-3" />
-                               {quiz.questionCount} 問
-                            </div>
-                            <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-300 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                               <ArrowRight className="w-4 h-4" />
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
              </motion.div>
           )}
 
