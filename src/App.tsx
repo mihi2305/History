@@ -344,7 +344,14 @@ export default function App() {
   const [responsesTable, setResponsesTable] = useState<any[]>([]);
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3 | 4>(1);
   const [showAdvancedJson, setShowAdvancedJson] = useState(false);
-  const [savedQuizzes, setSavedQuizzes] = useState<any[]>([]);
+  const [savedQuizzes, setSavedQuizzes] = useState<any[]>(() => {
+    try {
+      const cached = localStorage.getItem('hq_saved_quizzes');
+      return cached ? JSON.parse(cached) : [];
+    } catch (e) {
+      return [];
+    }
+  });
   const [isSaving, setIsSaving] = useState(false);
   const [currentQuizId, setCurrentQuizId] = useState<string | null>(null);
   const [dashboardView, setDashboardView] = useState<'list' | 'detail'>('list');
@@ -389,6 +396,7 @@ export default function App() {
       }));
 
       setSavedQuizzes(mapped);
+      localStorage.setItem('hq_saved_quizzes', JSON.stringify(mapped));
     } catch (err: any) {
       console.error('Error fetching quizzes:', err);
     }
