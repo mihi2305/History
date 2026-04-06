@@ -1126,9 +1126,12 @@ export default function App() {
                   setUserMode(null);
                   setQuizData(null);
                   setCurrentQuizId(null);
+                  setAnalysisData(null);
+                  setAnalysisStatus('idle');
                   setIsSubmitted(false);
                   setStudentStep('identity');
                   setCurrentQuestionIndex(0);
+                  setCurrentStep(1); // 初期状態に戻す
                 }}
                 className="text-xs font-bold px-3 py-1.5 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600 transition-all flex items-center gap-1.5"
               >
@@ -1411,7 +1414,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {currentStep === 2 && (
+          {userMode === 'teacher' && currentStep === 2 && (
             <motion.div
               key="step2"
               initial={{ opacity: 0, x: -20 }}
@@ -1465,7 +1468,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {currentStep === 3 && (
+          {userMode === 'teacher' && currentStep === 3 && (
             <motion.div
               key="step3"
               initial={{ opacity: 0, x: -20 }}
